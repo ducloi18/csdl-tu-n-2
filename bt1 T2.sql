@@ -52,3 +52,17 @@ ALTER TABLE HoaDon ADD LoaiHD CHAR(1) NOT NULL DEFAULT 'N';
 ALTER TABLE HoaDon ADD CONSTRAINT CK_LoaiHD CHECK (LoaiHD IN ('N', 'X', 'C', 'T'));
 ---f) ràng buộc cho bảng HoaDon với yêu cầu NgayGiao>=NgayLapHD
 ALTER TABLE HoaDon ADD CONSTRAINT CK_NgayGiao CHECK (NgayGiao >= NgayLapHD);
+CREATE TABLE [dbo].[Nhanvien](
+ [MaNV] [nchar](5) PRIMARY KEY,
+ [TenNV] [nvarchar](40) NOT NULL,
+ [DiaChi] [nvarchar](60) NULL,
+ [Dienthoai] [nvarchar](24) NULL )
+GO
+ALTER TABLE HoaDon ADD MaNV NCHAR(5);
+ALTER TABLE HoaDon ADD CONSTRAINT FK_HoaDon_Nhanvien FOREIGN KEY (MaNV) REFERENCES Nhanvien(MaNV);
+INSERT INTO KhachHang(MaKh, TenKh, LoaiKh, DiaChi, Phone, SoFax, DCMail, DiemTL)
+VALUES ('Kh001', 'NGUYEN DUC LOI', 'VIP', 'Q12-TP.HCM', '0352498400', '181020', 'loihs333@gmail.com', 10);
+INSERT INTO KhachHang(MaKh, TenKh, LoaiKh, DiaChi, Phone, SoFax, DCMail, DiemTL)
+VALUES ('Kh002', 'NGUYEN DUC LONG', 'TV', 'Q1-TP.HCM', '0367288199', '203050', 'longhs033@gmail.com', 50);
+INSERT INTO Nhanvien (MaNV, TenNV, DiaChi, Dienthoai)
+VALUES ('NV001', 'NGUYEN VAN A', 'PHU NHUAN', '0987265146');
